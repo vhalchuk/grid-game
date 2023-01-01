@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import { SquarePos } from '../../types';
 import { useModesQuery } from './useModesQuery';
-import { useState } from 'react';
 
 // separates the logic from the component
 export const useApp = () => {

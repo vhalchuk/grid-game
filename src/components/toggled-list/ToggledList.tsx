@@ -1,5 +1,6 @@
-import { SquarePos } from '../../types';
 import React, { FC } from 'react';
+
+import { SquarePos } from '../../types';
 
 type ToggledListProps = {
     toggledSquares: SquarePos[];

@@ -1,6 +1,7 @@
-import { SquarePos } from '../../types';
 import classNames from 'classnames';
 import React, { FC } from 'react';
+
+import { SquarePos } from '../../types';
 
 type GridProps = {
     size: number;
