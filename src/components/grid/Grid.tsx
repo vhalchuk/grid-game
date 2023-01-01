@@ -17,7 +17,7 @@ export const Grid: FC<GridProps> = ({
     gridClassName,
 }) => {
     return (
-        <table className={classNames('h-fit', gridClassName)}>
+        <table className={classNames('h-fit border-collapse', gridClassName)}>
             <tbody>
                 {[...Array(size)].map((_, row) => (
                     <tr key={row}>
@@ -27,17 +27,22 @@ export const Grid: FC<GridProps> = ({
                                     square[0] === row && square[1] === col
                             );
 
-                            const className = classNames(
-                                'border border-gray-600 min-w-[2rem] w-8 h-8 bg-white',
-                                {
-                                    'bg-blue-300': isToggled,
-                                }
-                            );
-
                             return (
                                 <td
                                     key={col}
-                                    className={className}
+                                    className={classNames(
+                                        `
+                                            border
+                                            border-gray-600
+                                            min-w-[2rem]
+                                            w-8 h-8
+                                            bg-white
+                                            box-border
+                                        `,
+                                        {
+                                            'bg-blue-300': isToggled,
+                                        }
+                                    )}
                                     onMouseEnter={() => onToggle([row, col])}
                                 />
                             );

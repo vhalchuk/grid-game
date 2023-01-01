@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 import { Grid } from '../grid/Grid';
 import { Select } from '../select/Select';
 import { ToggledList } from '../toggled-list/ToggledList';
-import './App.css';
 import { useApp } from './useApp';
 
 export const App: FC = () => {
