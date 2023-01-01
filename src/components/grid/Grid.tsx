@@ -1,4 +1,4 @@
-import { SquarePos } from './types';
+import { SquarePos } from '../../types';
 import classNames from 'classnames';
 import React, { FC } from 'react';
 

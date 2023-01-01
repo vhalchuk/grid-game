@@ -1,4 +1,4 @@
-import { SquarePos } from './types';
+import { SquarePos } from '../../types';
 import React, { FC } from 'react';
 
 type ToggledListProps = {

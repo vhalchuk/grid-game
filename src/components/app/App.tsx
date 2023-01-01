@@ -1,63 +1,40 @@
+import { Grid } from '../grid/Grid';
+import { Select } from '../select/Select';
+import { ToggledList } from '../toggled-list/ToggledList';
 import './App.css';
-import { Grid } from './Grid';
-import { Select } from './Select';
-import { ToggledList } from './ToggledList';
-import { SquarePos } from './types';
-import { useModesQuery } from './useModesQuery';
-import React, { FC, useState } from 'react';
+import { useApp } from './useApp';
+import React, { FC } from 'react';
 
 export const App: FC = () => {
-    const [selectedMode, setSelectedMode] = useState<string | null>(null);
-    const [toggledSquares, setToggledSquares] = useState<SquarePos[]>([]);
-    const [gamePending, setGamePending] = useState<boolean>(false);
-
-    const { modes, isLoading, error } = useModesQuery();
-
-    const selectOptions = modes.map((item) => ({
-        value: item.name,
-        label: item.name,
-    }));
-    const gridSize = modes.find((item) => item.name === selectedMode)?.field;
-
-    const toggleSquare = ([row, col]: SquarePos) => {
-        const index = toggledSquares.findIndex(
-            (square) => square[0] === row && square[1] === col
-        );
-
-        if (index === -1) {
-            setToggledSquares([...toggledSquares, [row, col]]);
-        } else {
-            const updatedSquares = [...toggledSquares];
-            updatedSquares.splice(index, 1);
-            setToggledSquares(updatedSquares);
-        }
-    };
-
-    const startGame = () => {
-        setGamePending(true);
-    };
-
-    const stopGame = () => {
-        setGamePending(false);
-        setToggledSquares([]);
-    };
+    const {
+        heading,
+        selectOptions,
+        selectedMode,
+        setSelectedMode,
+        isSelectDisabled,
+        gamePending,
+        gridSize,
+        error,
+        onButtonClick,
+        buttonLabel,
+        toggleSquare,
+        toggledSquares,
+    } = useApp();
 
     return (
         <main className="flex flex-col gap-4">
-            <h1 className="font-bold text-3xl">
-                {isLoading ? 'Loading...' : 'Grid game'}
-            </h1>
+            <h1 className="font-bold text-3xl">{heading}</h1>
             <div className="flex space-x-6 justify-center">
                 <Select
                     placeholder="Pick mode"
                     options={selectOptions}
                     selected={selectedMode}
                     onSelect={setSelectedMode}
-                    disabled={isLoading || gamePending}
+                    disabled={isSelectDisabled}
                 />
                 <button
                     disabled={!gridSize}
-                    onClick={gamePending ? stopGame : startGame}
+                    onClick={onButtonClick}
                     className={`
                         bg-blue-500
                         hover:bg-blue-700
@@ -70,7 +47,7 @@ export const App: FC = () => {
                         disabled:bg-blue-500
                     `}
                 >
-                    {gamePending ? 'Stop' : 'Start'}
+                    {buttonLabel}
                 </button>
             </div>
             {error && (
