@@ -1,1 +1,1 @@
-export type Square = [number /*row*/, number /*column*/];
+export type SquarePos = [number /*row*/, number /*column*/];

@@ -1,15 +1,22 @@
-import { Square } from './types';
+import { SquarePos } from './types';
+import classNames from 'classnames';
 import React, { FC } from 'react';
 
 type GridProps = {
     size: number;
-    toggledSquares: Square[];
-    onToggle: (square: Square) => void;
+    toggledSquares: SquarePos[];
+    onToggle: (square: SquarePos) => void;
+    gridClassName?: string;
 };
 
-export const Grid: FC<GridProps> = ({ size, toggledSquares, onToggle }) => {
+export const Grid: FC<GridProps> = ({
+    size,
+    toggledSquares,
+    onToggle,
+    gridClassName,
+}) => {
     return (
-        <table>
+        <table className={classNames('h-fit', gridClassName)}>
             <tbody>
                 {[...Array(size)].map((_, row) => (
                     <tr key={row}>
@@ -19,16 +26,17 @@ export const Grid: FC<GridProps> = ({ size, toggledSquares, onToggle }) => {
                                     square[0] === row && square[1] === col
                             );
 
+                            const className = classNames(
+                                'border border-gray-600 min-w-[2rem] w-8 h-8 bg-white',
+                                {
+                                    'bg-blue-300': isToggled,
+                                }
+                            );
+
                             return (
                                 <td
                                     key={col}
-                                    style={{
-                                        backgroundColor: isToggled
-                                            ? 'blue'
-                                            : 'white',
-                                        width: '20px',
-                                        height: '20px',
-                                    }}
+                                    className={className}
                                     onMouseEnter={() => onToggle([row, col])}
                                 />
                             );

@@ -9,7 +9,7 @@ type SelectOption = {
 
 type SelectProps = {
     placeholder: string;
-    selected: SelectValue | undefined;
+    selected: SelectValue | null;
     onSelect: (value: SelectValue) => void;
     options: SelectOption[];
     disabled?: boolean;
@@ -17,7 +17,7 @@ type SelectProps = {
 
 export const Select: FC<SelectProps> = ({
     placeholder,
-    selected = '',
+    selected,
     onSelect,
     options,
     disabled,
@@ -27,7 +27,12 @@ export const Select: FC<SelectProps> = ({
     };
 
     return (
-        <select onChange={handleChange} value={selected} disabled={disabled}>
+        <select
+            onChange={handleChange}
+            value={selected || ''}
+            disabled={disabled}
+            className="disabled:opacity-50 disabled:cursor-not-allowed"
+        >
             <option value="" disabled>
                 {placeholder}
             </option>
