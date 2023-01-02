@@ -41,6 +41,7 @@ The app will now be running on [http://localhost:5173](http://localhost:5173)
 
 ## Built With
 
+- [Typescript](https://www.typescriptlang.org/) - The language used
 - [React](https://reactjs.org/) - The web framework used
 - [Vite](https://vitejs.dev/) - The build tool used
 - [TailwindCSS](https://tailwindcss.com/) - The CSS framework used
